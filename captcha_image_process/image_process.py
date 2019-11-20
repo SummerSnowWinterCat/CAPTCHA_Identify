@@ -8,6 +8,7 @@
 from PIL import Image
 import time
 import random
+import numpy
 
 
 def remake_image(path):
@@ -134,13 +135,15 @@ def edge_search(path, deep_limit):
     return random_path
 
 
-def image_binarization(path):
+def image_binarization_with_zero_and_one(image_path):
     '''
     this function is image binarization function
     :param path: image file path
     :return: 0 1 list
     '''
-    _image = Image.open(path)
+    _image = Image.open(image_path)
+    _image = _image.convert('1')
+    _image.show()
     for h in range(_image.size[1]):
         temp = []
         for w in range(_image.size[0]):
@@ -151,6 +154,31 @@ def image_binarization(path):
                 temp.append(pixel)
             temp.append(pixel)
     return temp
+
+
+def image_binarization(image_file_path, save_path):
+    '''
+    this function is create a binarization image and save image into the file
+    :param image_file_path:this is origin image file path
+    :param save_path:this is save image file path
+    :return:null  response no any information
+    '''
+    _image = Image.open(image_file_path)
+    _image_gray = _image.convert('L')
+
+    data_image_gray = _image_gray.load()
+
+    _pixel = []
+
+    for h in range(_image_gray.size[1]):
+        for w in range(_image_gray.size[0]):
+            if data_image_gray[w, h] < 200:
+                data_image_gray[w, h] = 0
+            else:
+                data_image_gray[w, h] = 255
+    random_path = str(random.random())
+    _image_gray.save(save_path + random_path + '.png')
+    return 1
 
 
 def image_cut(path, cut_limit):
