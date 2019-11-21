@@ -9,6 +9,7 @@ from PIL import Image
 import time
 import random
 import numpy
+import os
 
 
 def remake_image(path):
@@ -156,13 +157,15 @@ def image_binarization_with_zero_and_one(image_path):
     return temp
 
 
-def image_binarization(image_file_path, save_path):
+def image_binarization(image_file_path, save_path, save_type):
     '''
     this function is create a binarization image and save image into the file
     :param image_file_path:this is origin image file path
     :param save_path:this is save image file path
+    :param save_type:this is image type with png or jpg or jpeg or bmp
     :return:null  response no any information
     '''
+    file_name = image_file_path.split('/')[len(image_file_path.split('/')) - 1]
     _image = Image.open(image_file_path)
     _image_gray = _image.convert('L')
 
@@ -176,9 +179,9 @@ def image_binarization(image_file_path, save_path):
                 data_image_gray[w, h] = 0
             else:
                 data_image_gray[w, h] = 255
-    random_path = str(random.random())
-    _image_gray.save(save_path + random_path + '.png')
-    return 1
+    save_path = save_path + file_name + '.{}'.format(save_type)
+    _image_gray.save(save_path)
+    return save_path
 
 
 def image_cut(path, cut_limit):
