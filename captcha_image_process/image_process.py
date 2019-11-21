@@ -143,8 +143,7 @@ def image_binarization_with_zero_and_one(image_path):
     :return: 0 1 list
     '''
     _image = Image.open(image_path)
-    _image = _image.convert('1')
-    _image.show()
+
     for h in range(_image.size[1]):
         temp = []
         for w in range(_image.size[0]):
@@ -154,6 +153,7 @@ def image_binarization_with_zero_and_one(image_path):
                 pixel = 1
                 temp.append(pixel)
             temp.append(pixel)
+        print(temp)
     return temp
 
 
@@ -198,4 +198,8 @@ def image_cut(path, cut_limit):
     limit_width = _image.size[0]
     _image.crop(())
     _image.save(save_path, 'png')
+    return 0
+
+
+def image_vector(array):
     return 0
