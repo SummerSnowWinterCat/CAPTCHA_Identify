@@ -157,12 +157,11 @@ def image_binarization_with_zero_and_one(image_path):
     return temp
 
 
-def image_binarization(image_file_path, save_path, save_type):
+def image_binarization(image_file_path, save_path):
     '''
     this function is create a binarization image and save image into the file
     :param image_file_path:this is origin image file path
     :param save_path:this is save image file path
-    :param save_type:this is image type with png or jpg or jpeg or bmp
     :return:null  response no any information
     '''
     file_name = image_file_path.split('/')[len(image_file_path.split('/')) - 1]
@@ -179,7 +178,7 @@ def image_binarization(image_file_path, save_path, save_type):
                 data_image_gray[w, h] = 0
             else:
                 data_image_gray[w, h] = 255
-    save_path = save_path + file_name + '.{}'.format(save_type)
+    save_path = save_path + file_name
     _image_gray.save(save_path)
     return save_path
 
