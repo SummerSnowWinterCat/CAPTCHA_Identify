@@ -1,6 +1,7 @@
 import numpy
 import os
 import time
+import re
 import captcha_image_process.image_process as process
 
 # 二值图
@@ -25,4 +26,7 @@ def create_image_vector(image_file_path):
 
 if __name__ == '__main__':
     for path in os.listdir(_image_binarization_path):
-        print(create_image_vector(_image_binarization_path + path))
+        if re.search(r'\.(png|jpeg|jpg)$', path) is None:
+            continue
+        else:
+            print(create_image_vector(_image_binarization_path + path))
