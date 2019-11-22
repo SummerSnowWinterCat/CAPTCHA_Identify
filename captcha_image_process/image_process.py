@@ -136,13 +136,13 @@ def edge_search(path, deep_limit):
     return random_path
 
 
-def image_binarization_with_zero_and_one(image_path):
+def image_binarization_with_255_to_one(image_file_path):
     '''
     this function is image binarization function
     :param path: image file path
-    :return: pixel list by 0 1 and image size
+    :return: pixel list and image size
     '''
-    _image = Image.open(image_path)
+    _image = Image.open(image_file_path)
     _image_size = _image.size
     _array_image = []
     for h in range(0, _image.size[1]):
@@ -183,24 +183,6 @@ def image_binarization(image_file_path, save_path):
     save_path = save_path + file_name
     _image_gray.save(save_path)
     return save_path
-
-
-def image_cut(path, cut_limit):
-    '''
-    this is image cut function
-    :param path:image file path
-    :param cut_limit:cut length
-    :return: 0
-    '''
-    save_path = '../captcha_image_remake/' + str(random.random()) + '.png'
-    #
-    _image = Image.open(path)
-    image_count = int(_image.size[0] / cut_limit)
-    limit_height = _image.size[1]
-    limit_width = _image.size[0]
-    _image.crop(())
-    _image.save(save_path, 'png')
-    return 0
 
 
 def image_binarization_vector(array_list, split_size):
