@@ -218,3 +218,18 @@ def image_binarization_vector(array_list, split_size):
             result.append(hsp_result)
 
     return numpy.vstack(result)
+
+
+def image_binarization_change_0_1(data):
+    '''
+    this function is change image binarization 0 to 1 1 to 0
+    :param data:list or numpy
+    :return:numpy asarray or array
+    '''
+    np_list = numpy.asarray(data)
+    np_list[np_list == 0] = 3  # 0 change 3
+    np_list[np_list == 1] = 0  # 1 change 0
+    np_list[np_list == 3] = 1  # 3 change 1
+    return np_list
+
+

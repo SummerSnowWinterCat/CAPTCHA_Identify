@@ -6,19 +6,7 @@ import test_module.test_array as a
 import random
 
 if __name__ == '__main__':
-    # print('set a array')
-    array_w = 60
-    array_h = 60
-    # print('array({}x{})'.format(array_w, array_h))
-    all_arraylist = []
-    for h in range(0, array_h):
-        set_h = []
-        for w in range(0, array_w):
-            set_h.append(random.randint(0, 1))
-        all_arraylist.append(set_h)
+    list, size = (i_process.image_binarization_with_255_to_one('../captcha_binarization_images/1.png.png'))
+    np_list = i_process.image_binarization_change_0_1(list)
 
-    arraylist = numpy.array(all_arraylist)
-    print(arraylist)
-    print('===================')
-    print('===================')
-    print(a.array_split_for_image_size(arraylist, 6))
+    print(i_process.image_binarization_vector(np_list, 6))
