@@ -140,26 +140,31 @@ def image_binarization_with_zero_and_one(image_path):
     '''
     this function is image binarization function
     :param path: image file path
-    :return: 0 1 list
+    :return: pixel list by 0 1 and image size
     '''
     _image = Image.open(image_path)
-
-    for h in range(_image.size[1]):
+    _image_size = _image.size
+    _array_image = []
+    for h in range(0, _image.size[1]):
         temp = []
-        for w in range(_image.size[0]):
+        for w in range(0, _image.size[0]):
             position = (w, h)
             pixel = _image.getpixel(position)
             if pixel == 255:
                 pixel = 1
                 temp.append(pixel)
-            temp.append(pixel)
-        print(temp)
-    return temp
+            else:
+                pixel = 0
+                temp.append(pixel)
+        _array_image.append(temp)
+    return _array_image, _image_size
 
 
 def image_binarization(image_file_path, save_path):
     '''
     this function is create a binarization image and save image into the file
+    >>open image read pixel remove pixel->>
+    >>save image return image file path
     :param image_file_path:this is origin image file path
     :param save_path:this is save image file path
     :return:null  response no any information
@@ -167,11 +172,8 @@ def image_binarization(image_file_path, save_path):
     file_name = image_file_path.split('/')[len(image_file_path.split('/')) - 1]
     _image = Image.open(image_file_path)
     _image_gray = _image.convert('L')
-
     data_image_gray = _image_gray.load()
-
     _pixel = []
-
     for h in range(_image_gray.size[1]):
         for w in range(_image_gray.size[0]):
             if data_image_gray[w, h] < 200:
@@ -201,5 +203,36 @@ def image_cut(path, cut_limit):
     return 0
 
 
-def image_vector(array):
-    return 0
+def image_binarization_vector(array_list, split_size):
+    '''
+    this function is remake array to vector and statistics
+    :param array_list:numpy data list
+    :param split_size:vertical and horizontal split count
+    :return:vector list
+    '''
+    vsp_list = numpy.vsplit(array_list, split_size)  # vertical resize
+    ''' |split_size = vertical count
+    [0 0|0 0]
+    [0 0|0 0]
+    [0 0|0 0]
+    [0 0|0 0]
+    '''
+    hsp_list = []  # horizontal resize
+    for vsp in vsp_list:
+        hsp_list.append(numpy.hsplit(vsp, split_size))
+    '''
+    [0 0|0 0]
+    [0 0|0 0]
+    ---------
+    [0 0|0 0]
+    [0 0|0 0]
+    '''
+    result = []
+    for hsp in hsp_list:
+        hsp_result = []
+        for i in hsp:
+            sum_number = numpy.sum(i)
+            hsp_result.append(sum_number)
+            result.append(hsp_result)
+
+    return numpy.vstack(result)
