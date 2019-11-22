@@ -6,7 +6,5 @@ import test_module.test_array as a
 import random
 
 if __name__ == '__main__':
-    list, size = (i_process.image_binarization_with_255_to_one('../captcha_binarization_images/1.png.png'))
-    np_list = i_process.image_binarization_change_0_1(list)
-
-    print(i_process.image_binarization_vector(np_list, 6))
+    i_process.image_to_gray_scale_file_path('../test_image/captcha_single_image(32x32)/',
+                                            save_file_path='../captcha_binarization_images/')

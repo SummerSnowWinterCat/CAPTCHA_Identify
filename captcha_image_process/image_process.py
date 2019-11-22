@@ -12,7 +12,7 @@ import numpy
 import os
 
 
-def remake_image(path):
+def remake_image(image_file_path):
     '''
     this function is block cut and cross cut
     like:
@@ -23,7 +23,7 @@ def remake_image(path):
     :param path:image file path
     :return: return image file path
     '''
-    _image = Image.open(path)
+    _image = Image.open(image_file_path)
     limit_height = _image.size[1]
     limit_width = _image.size[0]
     all_limit = 0  # image limit size
@@ -160,7 +160,7 @@ def image_binarization_with_255_to_one(image_file_path):
     return _array_image, _image_size
 
 
-def image_binarization(image_file_path, save_path):
+def image_save_to_gray_scale(image_file_path, save_file_path):
     '''
     this function is create a binarization image and save image into the file
     >>open image read pixel remove pixel->>
@@ -180,19 +180,19 @@ def image_binarization(image_file_path, save_path):
                 data_image_gray[w, h] = 0
             else:
                 data_image_gray[w, h] = 255
-    save_path = save_path + file_name
+    save_path = save_file_path + file_name
     _image_gray.save(save_path)
     return save_path
 
 
-def image_binarization_vector(array_list, split_size):
+def image_binarization_vector(data, split_size):
     '''
     this function is remake array to vector and statistics
     :param array_list:numpy data list
     :param split_size:vertical and horizontal split count
     :return:vector list
     '''
-    vsp_list = numpy.vsplit(array_list, split_size)  # vertical resize
+    vsp_list = numpy.vsplit(data, split_size)  # vertical resize
     ''' |split_size = vertical count
     [0 0|0 0]
     [0 0|0 0]
@@ -233,3 +233,16 @@ def image_binarization_change_0_1(data):
     return np_list
 
 
+def image_to_gray_scale_file_path(image_file_path, save_file_path):
+    '''
+    this function is save gray scale file by group or file path all image
+    :param image_file_path:image path
+    :param save_file_path:save path
+    :return:save path list
+    '''
+    path_file = []
+    for dir_list in os.listdir(image_file_path):
+        path_file.append(image_file_path + dir_list)
+    for path in path_file:
+        image_save_to_gray_scale(image_file_path=path, save_file_path=save_file_path)
+    return path_file
