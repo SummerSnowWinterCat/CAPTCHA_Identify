@@ -216,7 +216,7 @@ def image_binarization_vector(data, split_size):
             sum_number = numpy.sum(i)
             hsp_result.append(sum_number)
             result.append(hsp_result)
-
+    # numpy.vstack(result)
     return numpy.vstack(result)
 
 
@@ -246,3 +246,36 @@ def image_to_gray_scale_file_path(image_file_path, save_file_path):
     for path in path_file:
         image_save_to_gray_scale(image_file_path=path, save_file_path=save_file_path)
     return path_file
+
+
+def create_image_vector(image_file_path, block_size, save_file_path):
+    '''
+    Create Image Vector
+    :param image_file_path:image file path
+    :return:vector,label(image information)
+    '''
+    label = os.path.basename(image_file_path).replace('.', '_')
+    # 灰度化 并 保存path
+    gray_scale_image_path = image_save_to_gray_scale(image_file_path=image_file_path,
+                                                     save_file_path=save_file_path)
+    # 获取pixel数组和尺寸
+    data, image_size = image_binarization_with_255_to_one(gray_scale_image_path)
+    # 处理0 1 转化白与黑
+    data = image_binarization_change_0_1(data=data)
+    # 数组处理返回向量
+    vector = image_binarization_vector(data=data, split_size=block_size)
+    return vector, label
+
+
+def save_vector_file(data, file_name, save_file_path):
+    '''
+    This function is save a vector tobe a file
+    :param data:array or asarray list
+    :param file_name:file name
+    :param file_type:type of file
+    :param save_file_path:save file path
+    :return:save file path [full path]
+    '''
+    _save_path = save_file_path + file_name
+    numpy.savetxt(_save_path, data)
+    return _save_path
