@@ -20,7 +20,7 @@ def init_binarization_images():
     for train in range(len(train_data)):
         print(train_data[train])
         vector, label = i_process.create_binarization_image_vector(image_file_path=train_data[train],
-                                                                        save_file_path=binarization_path, block_size=6)
+                                                                   save_file_path=binarization_path, block_size=6)
         vector_data_path = i_process.save_vector_file(data=vector, file_name=str(label), save_file_path=vector_path)
         vector_data.append(vector_data_path)
         print('vector_create No.{}'.format(train))
@@ -28,4 +28,5 @@ def init_binarization_images():
 
 
 if __name__ == '__main__':
-    i_process.vector_file_unfreeze(train_data_path=vector_path)
+    vector, label = i_process.vector_file_unfreeze(train_data_path=vector_path)
+    print(len(vector),len(label))

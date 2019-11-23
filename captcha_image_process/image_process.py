@@ -300,7 +300,7 @@ def vector_file_unfreeze(train_data_path):
         vector = numpy.loadtxt(full_path)
         vector_array.append(vector)
         vector_label.append(label)
-    return vector_array, label
+    return vector_array, vector_label
 
 
 def get_training_data_path(train_data_path):
