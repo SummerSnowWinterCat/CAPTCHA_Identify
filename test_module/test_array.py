@@ -35,11 +35,9 @@ if __name__ == '__main__':
                                                                        save_file_path='../test_image/test_image_box/')
     # sample data
     vector_data, vector_label = i_process.vector_file_unfreeze(train_data_path=vector_path)
+    dis_result = []
     if len(vector_data) == len(vector_label):
         print('unfreeze complete')
     for data in range(len(vector_data)):
-        result = (test_data - vector_data[data])
-        result = numpy.sum(result)
-        plot.scatter(x=result, y=vector_label[data], alpha=0.8, s=30)
-
-    plot.show()
+        print('load..>>{}'.format(data))
+        print(vector_data[data])
