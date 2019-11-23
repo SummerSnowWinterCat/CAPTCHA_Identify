@@ -10,6 +10,7 @@ import time
 import random
 import numpy
 import os
+import re
 
 
 def remake_image(image_file_path):
@@ -166,7 +167,7 @@ def image_save_to_gray_scale(image_file_path, save_file_path):
     >>open image read pixel remove pixel->>
     >>save image return image file path
     :param image_file_path:this is origin image file path
-    :param save_path:this is save image file path
+    :param save_file_path:this is save image file path
     :return:null  response no any information
     '''
     file_name = image_file_path.split('/')[len(image_file_path.split('/')) - 1]
@@ -252,6 +253,8 @@ def create_image_vector(image_file_path, block_size, save_file_path):
     '''
     Create Image Vector
     :param image_file_path:image file path
+    :param block_size: block size is 32*32 to 8*8 =4
+    :param save_file_path:save file path is to save vector tobe a file
     :return:vector,label(image information)
     '''
     label = os.path.basename(image_file_path).replace('.', '_')
@@ -281,13 +284,16 @@ def save_vector_file(data, file_name, save_file_path):
     return _save_path
 
 
-def get_training_data():
-    image_file_path = '../captcha_binarization_images/'
-
-    dirnames = os.walk(image_file_path)
-    dirs_path = []
-    for dirs in dirnames:
-        dirs_path.append(dirs[0])
-    for dirs in dirs_path:
-        print(os.listdir(dirs))
-    return 0
+def get_training_data_path(train_data_path):
+    full_path = []  # all path
+    for root, dirs, files in os.walk(train_data_path):
+        for dir in dirs:
+            root_path = root + dir
+            for file in os.listdir(root_path):
+                file_full_path = (root_path + '{}'.format('/') + file)
+                if re.search(r'\.(png|jpeg|jpg)$', file_full_path) is None:
+                    continue
+                else:
+                    full_path.append(file_full_path)
+    print('load {} - data'.format(len(full_path)))
+    return full_path

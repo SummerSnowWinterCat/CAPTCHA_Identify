@@ -1,0 +1,1 @@
+from captcha_image_process import image_data_process

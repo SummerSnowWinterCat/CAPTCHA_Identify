@@ -13,6 +13,7 @@ _vector_file_path = '../train_data/'
 # 缩小像素 10*10
 _block_size = 10
 
+
 if __name__ == '__main__':
     test_data, test_label = process.create_image_vector(image_file_path='../test_data/unknown.png',
                                                         block_size=_block_size,
