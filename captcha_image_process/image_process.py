@@ -279,3 +279,15 @@ def save_vector_file(data, file_name, save_file_path):
     _save_path = save_file_path + file_name
     numpy.savetxt(_save_path, data)
     return _save_path
+
+
+def get_training_data():
+    image_file_path = '../captcha_binarization_images/'
+
+    dirnames = os.walk(image_file_path)
+    dirs_path = []
+    for dirs in dirnames:
+        dirs_path.append(dirs[0])
+    for dirs in dirs_path:
+        print(os.listdir(dirs))
+    return 0
