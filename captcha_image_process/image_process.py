@@ -249,7 +249,7 @@ def image_to_gray_scale_file_path(image_file_path, save_file_path):
     return path_file
 
 
-def create_image_vector(image_file_path, block_size, save_file_path):
+def create_binarization_image_vector(image_file_path, block_size, save_file_path):
     '''
     Create Image Vector
     :param image_file_path:image file path
@@ -284,7 +284,31 @@ def save_vector_file(data, file_name, save_file_path):
     return _save_path
 
 
+def vector_file_unfreeze(train_data_path):
+    '''
+    This function is load file tobe a vector
+    :param train_data_path:train data path
+    :return:vector array
+    :return:label array
+    '''
+    dir_list = os.listdir(train_data_path)
+    vector_array = []
+    vector_label = []
+    for train_path in dir_list:
+        full_path = (train_data_path + train_path)
+        label = train_path.split('_')[0]
+        vector = numpy.loadtxt(full_path)
+        vector_array.append(vector)
+        vector_label.append(label)
+    return vector_array, label
+
+
 def get_training_data_path(train_data_path):
+    '''
+    this is to create training data function
+    :param train_data_path:train data save path
+    :return: this data file path
+    '''
     full_path = []  # all path
     for root, dirs, files in os.walk(train_data_path):
         for dir in dirs:
