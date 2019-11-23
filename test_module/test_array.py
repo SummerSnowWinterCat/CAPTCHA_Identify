@@ -40,4 +40,4 @@ if __name__ == '__main__':
         print('unfreeze complete')
     for data in range(len(vector_data)):
         print('load..>>{}'.format(data))
-        print(vector_data[data])
+        print(numpy.sqrt(numpy.sum(numpy.square(test_data.reshape(-1) - vector_data[data].reshape(-1)))))

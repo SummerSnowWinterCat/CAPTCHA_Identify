@@ -267,6 +267,8 @@ def create_binarization_image_vector(image_file_path, block_size, save_file_path
     data = image_binarization_change_0_1(data=data)
     # 数组处理返回向量
     vector = image_binarization_vector(data=data, split_size=block_size)
+
+    # 向量化
     return vector, label
 
 
