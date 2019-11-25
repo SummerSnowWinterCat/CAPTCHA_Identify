@@ -19,7 +19,7 @@ def init_binarization_images(train_path, binarization_path, vector_path):
                                                                  save_file_path=binarization_path, block_size=10)
         vector_data_path = process.save_vector_file(data=vector, file_name=str(label), save_file_path=vector_path)
         vector_data.append(vector_data_path)
-        # print('vector_create No.{}'.format(train))
+        print('vector_create No.{}'.format(train))
     return 1
 
 
