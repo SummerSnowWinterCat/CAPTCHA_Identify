@@ -1,15 +1,17 @@
 from captcha_image_process import image_data_process, image_process, k_nn_mod
 import os
-
-train_path = '../captcha_train_images/'  # sample or train image (origin)
-binarization_path = '../captcha_binarization_images/'  # image binarization file path
-vector_path = '../train_data/'  # train data file path (vector file)
-test_image_file_path = '../test_data/'  # test data file path
-test_image_save_path = '../test_image/test_image_box/'  # test data binarization file path
+from test_module import create_test_data
+train_path = os.path.abspath('.')+'/captcha_train_images/'  # sample or train image (origin)
+binarization_path = os.path.abspath('.')+'/captcha_binarization_images/'  # image binarization file path
+vector_path = os.path.abspath('.')+'/train_data/'  # train data file path (vector file)
+test_image_file_path = os.path.abspath('.')+'/test_data/'  # test data file path
+test_image_save_path = os.path.abspath('.')+'/test_image/test_image_box/'  # test data binarization file path
 block_size = 10  # block size is resize image binarization like 60*60->10*10 = 10
 k = 3  # this is forecast range
 forecast_num = []  # forecast result
 if __name__ == '__main__':
+    # create train data
+    create_test_data.create_train_data()
     # step.01
     # init binarization image
     print('<<<init>>>')

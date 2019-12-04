@@ -5,7 +5,6 @@ import re
 import captcha_image_process.image_process as i_process
 import captcha_image_process.image_data_process as d_p
 import captcha_image_process.k_nn_mod as knn
-import matplotlib.pyplot as plot
 
 # d_p.create_image_char(image_width=60, image_height=60, char=9, count=1000, background='white',
 #                      save_file_path='../captcha_train_images/9/')

@@ -46,6 +46,7 @@ def load_test_vector(image_file_path, block_size, save_file_path):
     _test_data = []
     _test_label = []
     if len(os.listdir(image_file_path)) > 0:
+
         for dirs in os.listdir(image_file_path):
             full_path = image_file_path + dirs
             if re.search(r'\.(png|jpeg|jpg)$', full_path) is None:
